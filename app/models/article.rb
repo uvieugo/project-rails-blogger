@@ -23,6 +23,11 @@ class Article < ApplicationRecord
         new_or_found_tags = tag_names.collect { |name| Tag.find_or_create_by(name: name) }
         #attach found tags to article
         self.tags = new_or_found_tags
-
     end
+
+    def impressions
+        count = self.view_count +=1
+        self.update(view_count: count)
+    end
+    
 end
